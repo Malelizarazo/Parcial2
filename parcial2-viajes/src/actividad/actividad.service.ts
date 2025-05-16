@@ -16,9 +16,7 @@ export class ActividadService {
     private actividadRepository: Repository<Actividad>,
   ) {}
 
-  async crearActividad(
-    actividadDTO: CrearActividadDTO,
-  ): Promise<Actividad> {
+  async crearActividad(actividadDTO: CrearActividadDTO): Promise<Actividad> {
     const { titulo } = actividadDTO;
     const simbolos = /[^a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]/;
     if (!titulo || titulo.length < 15 || simbolos.test(titulo)) {
@@ -46,8 +44,7 @@ export class ActividadService {
     if (nuevoEstado === 1) {
       // Cerrar: al menos 80% del cupo lleno
       if (
-        actividad.estudiantes.length <
-        Math.ceil(actividad.cupoMaximo * 0.8)
+        actividad.estudiantes.length < Math.ceil(actividad.cupoMaximo * 0.8)
       ) {
         throw new BadRequestException(
           'Debe tener al menos 80% del cupo lleno para cerrar',
@@ -68,4 +65,4 @@ export class ActividadService {
   async findAllActividadesByDate(fecha: string): Promise<Actividad[]> {
     return this.actividadRepository.find({ where: { fecha } });
   }
-} 
+}

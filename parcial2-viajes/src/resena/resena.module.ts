@@ -12,4 +12,4 @@ import { Actividad } from '../actividad/entities/actividad.entity';
   controllers: [ResenaController],
   exports: [ResenaService],
 })
-export class ResenaModule {} 
+export class ResenaModule {}

@@ -70,4 +70,4 @@ export class EstudianteService {
     await this.estudianteRepository.save(estudiante);
     return { mensaje: 'Inscripción exitosa' };
   }
-} 
+}

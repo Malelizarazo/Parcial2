@@ -59,4 +59,4 @@ export class ResenaService {
     if (!resena) throw new NotFoundException('Reseña no encontrada');
     return resena;
   }
-} 
+}

@@ -11,4 +11,4 @@ import { Estudiante } from '../estudiante/entities/estudiante.entity';
   controllers: [ActividadController],
   exports: [ActividadService],
 })
-export class ActividadModule {} 
+export class ActividadModule {}
