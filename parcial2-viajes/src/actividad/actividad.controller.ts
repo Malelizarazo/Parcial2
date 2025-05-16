@@ -9,7 +9,9 @@ export class ActividadController {
   constructor(private readonly actividadService: ActividadService) {}
 
   @Post()
-  async crearActividad(@Body() actividadDTO: CrearActividadDTO): Promise<ActividadDTO> {
+  async crearActividad(
+    @Body() actividadDTO: CrearActividadDTO,
+  ): Promise<ActividadDTO> {
     return this.actividadService.crearActividad(actividadDTO);
   }
 
@@ -22,7 +24,9 @@ export class ActividadController {
   }
 
   @Get('fecha/:fecha')
-  async findAllActividadesByDate(@Param('fecha') fecha: string): Promise<ActividadDTO[]> {
+  async findAllActividadesByDate(
+    @Param('fecha') fecha: string,
+  ): Promise<ActividadDTO[]> {
     return this.actividadService.findAllActividadesByDate(fecha);
   }
-} 
+}
