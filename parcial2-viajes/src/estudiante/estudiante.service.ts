@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Estudiante } from './entities/estudiante.entity';
@@ -15,7 +19,9 @@ export class EstudianteService {
     private actividadRepository: Repository<Actividad>,
   ) {}
 
-  async crearEstudiante(estudianteDTO: CrearEstudianteDTO): Promise<Estudiante> {
+  async crearEstudiante(
+    estudianteDTO: CrearEstudianteDTO,
+  ): Promise<Estudiante> {
     const { correo, semestre } = estudianteDTO;
     const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     if (!emailRegex.test(correo)) {
@@ -37,7 +43,10 @@ export class EstudianteService {
     return estudiante;
   }
 
-  async inscribirseActividad(estudianteId: number, actividadId: number): Promise<MensajeDTO> {
+  async inscribirseActividad(
+    estudianteId: number,
+    actividadId: number,
+  ): Promise<MensajeDTO> {
     const estudiante = await this.estudianteRepository.findOne({
       where: { id: estudianteId },
       relations: ['actividades'],
@@ -48,9 +57,15 @@ export class EstudianteService {
       relations: ['estudiantes'],
     });
     if (!actividad) throw new NotFoundException('Actividad no encontrada');
-    if (actividad.estado !== 0) throw new BadRequestException('La actividad no está abierta');
-    if (actividad.estudiantes.length >= actividad.cupoMaximo) throw new BadRequestException('No hay cupo disponible');
-    if (estudiante.actividades.some(a => a.id === actividadId)) throw new BadRequestException('Ya está inscrito en esta actividad');
+    if (actividad.estado !== 0) {
+      throw new BadRequestException('La actividad no está abierta');
+    }
+    if (actividad.estudiantes.length >= actividad.cupoMaximo) {
+      throw new BadRequestException('No hay cupo disponible');
+    }
+    if (estudiante.actividades.some((a) => a.id === actividadId)) {
+      throw new BadRequestException('Ya está inscrito en esta actividad');
+    }
     estudiante.actividades.push(actividad);
     await this.estudianteRepository.save(estudiante);
     return { mensaje: 'Inscripción exitosa' };
