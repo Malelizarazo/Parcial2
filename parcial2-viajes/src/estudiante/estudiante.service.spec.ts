@@ -44,6 +44,30 @@ describe('EstudianteService', () => {
     actividadRepository = module.get<Repository<Actividad>>(
       getRepositoryToken(Actividad),
     );
+
+    // Mock mejorado para findOne
+    mockEstudianteRepository.findOne.mockImplementation((args) => {
+      // Si se busca por id y relaciones, devolver un estudiante simulado
+      if (args && args.where && args.where.id === 1) {
+        return Promise.resolve({
+          id: 1,
+          actividades: [],
+          resenas: [],
+        });
+      }
+      return Promise.resolve(null);
+    });
+    mockActividadRepository.findOne.mockImplementation((args) => {
+      if (args && args.where && args.where.id === 1) {
+        return Promise.resolve({
+          id: 1,
+          estado: 0,
+          estudiantes: [],
+          cupoMaximo: 10,
+        });
+      }
+      return Promise.resolve(null);
+    });
   });
 
   it('should be defined', () => {
@@ -187,7 +211,7 @@ describe('EstudianteService', () => {
       ).rejects.toThrow(BadRequestException);
     });
 
-    it('should successfully enroll student in activity', async () => {
+    it('should successfully enroll student 1 in activity 1', async () => {
       const estudiante = {
         id: 1,
         actividades: [],

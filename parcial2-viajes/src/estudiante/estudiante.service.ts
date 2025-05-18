@@ -67,7 +67,16 @@ export class EstudianteService {
       throw new BadRequestException('Ya está inscrito en esta actividad');
     }
     estudiante.actividades.push(actividad);
+    if (!actividad.estudiantes) {
+      actividad.estudiantes = [];
+    }
+    actividad.estudiantes.push(estudiante);
     await this.estudianteRepository.save(estudiante);
+    await this.actividadRepository.save(actividad);
+    await this.estudianteRepository.findOne({
+      where: { id: estudianteId },
+      relations: ['actividades'],
+    });
     return { mensaje: 'Inscripción exitosa' };
   }
 }

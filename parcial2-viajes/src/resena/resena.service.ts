@@ -38,11 +38,15 @@ export class ResenaService {
     if (actividad.estado !== 2) {
       throw new BadRequestException('La actividad no está finalizada');
     }
-    if (!estudiante.actividades.some((a) => a.id === actividadId)) {
+    console.log('Intentando agregar reseña para estudiante:', estudianteId, 'en actividad:', actividadId);
+    console.log('Actividades del estudiante:', JSON.stringify(estudiante.actividades));
+    if (!estudiante.actividades.some((a) => a.id == actividadId)) {
+      console.log('No se encontró la actividad en el array de actividades del estudiante');
       throw new BadRequestException(
         'El estudiante no está inscrito en la actividad',
       );
     }
+    console.log('El estudiante está inscrito en la actividad, se procede a crear la reseña');
     const resena = this.resenaRepository.create({
       ...resenaDTO,
       estudiante,

@@ -29,8 +29,10 @@ export class Estudiante {
   @Column()
   semestre: number;
 
-  @ManyToMany(() => Actividad)
-  @JoinTable()
+  @ManyToMany(() => Actividad, (actividad) => actividad.estudiantes)
+  @JoinTable({
+    name: 'estudiante_actividades_actividad',
+  })
   actividades: Actividad[];
 
   @OneToMany(() => Resena, (resena) => resena.estudiante)
