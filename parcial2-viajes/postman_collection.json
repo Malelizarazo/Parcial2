@@ -1,0 +1,532 @@
+{
+  "info": {
+    "name": "Cultural Activities Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Estudiantes",
+      "item": [
+        {
+          "name": "Crear Estudiante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cedula\": 1234567890,\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"juan.perez@example.com\",\n  \"programa\": \"Ingeniería de Sistemas\",\n  \"semestre\": 5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/estudiantes",
+              "host": ["{{base_url}}"],
+              "path": ["estudiantes"]
+            },
+            "description": "Crea un nuevo estudiante en el sistema"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cedula\": 1234567890,\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"juan.perez@example.com\",\n  \"programa\": \"Ingeniería de Sistemas\",\n  \"semestre\": 5\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"cedula\": 1234567890,\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"juan.perez@example.com\",\n  \"programa\": \"Ingeniería de Sistemas\",\n  \"semestre\": 5,\n  \"actividades\": [],\n  \"resenas\": []\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cedula\": 1234567890,\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"invalid-email\",\n  \"programa\": \"Ingeniería de Sistemas\",\n  \"semestre\": 11\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Correo inválido\",\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Obtener Estudiante por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/estudiantes/1",
+              "host": ["{{base_url}}"],
+              "path": ["estudiantes", "1"]
+            },
+            "description": "Obtiene la información de un estudiante por su ID"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"cedula\": 1234567890,\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"juan.perez@example.com\",\n  \"programa\": \"Ingeniería de Sistemas\",\n  \"semestre\": 5,\n  \"actividades\": [],\n  \"resenas\": []\n}"
+            },
+            {
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/999",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Estudiante no encontrado\",\n  \"error\": \"Not Found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Inscribirse a Actividad",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/estudiantes/1/inscribirse/1",
+              "host": ["{{base_url}}"],
+              "path": ["estudiantes", "1", "inscribirse", "1"]
+            },
+            "description": "Inscribe a un estudiante en una actividad"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/1/inscribirse/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes", "1", "inscribirse", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mensaje\": \"Inscripción exitosa\"\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/1/inscribirse/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["estudiantes", "1", "inscribirse", "1"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"La actividad no está abierta\",\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actividades",
+      "item": [
+        {
+          "name": "Crear Actividad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Visita al Museo Nacional de Colombia\",\n  \"fecha\": \"2024-05-20\",\n  \"cupoMaximo\": 30\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/actividades",
+              "host": ["{{base_url}}"],
+              "path": ["actividades"]
+            },
+            "description": "Crea una nueva actividad cultural"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"titulo\": \"Visita al Museo Nacional de Colombia\",\n  \"fecha\": \"2024-05-20\",\n  \"cupoMaximo\": 30\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/actividades",
+                  "host": ["{{base_url}}"],
+                  "path": ["actividades"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"titulo\": \"Visita al Museo Nacional de Colombia\",\n  \"fecha\": \"2024-05-20\",\n  \"cupoMaximo\": 30,\n  \"estado\": 0,\n  \"estudiantes\": [],\n  \"resenas\": []\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"titulo\": \"Short\",\n  \"fecha\": \"2024-05-20\",\n  \"cupoMaximo\": 30\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/actividades",
+                  "host": ["{{base_url}}"],
+                  "path": ["actividades"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"El título debe tener mínimo 15 caracteres y no contener símbolos\",\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cambiar Estado de Actividad",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/actividades/1/estado",
+              "host": ["{{base_url}}"],
+              "path": ["actividades", "1", "estado"]
+            },
+            "description": "Cambia el estado de una actividad (0: Abierta, 1: Cerrada, 2: Finalizada)"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estado\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/actividades/1/estado",
+                  "host": ["{{base_url}}"],
+                  "path": ["actividades", "1", "estado"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"titulo\": \"Visita al Museo Nacional de Colombia\",\n  \"fecha\": \"2024-05-20\",\n  \"cupoMaximo\": 30,\n  \"estado\": 1,\n  \"estudiantes\": [],\n  \"resenas\": []\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estado\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/actividades/1/estado",
+                  "host": ["{{base_url}}"],
+                  "path": ["actividades", "1", "estado"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Debe tener al menos 80% del cupo lleno para cerrar\",\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Buscar Actividades por Fecha",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/actividades/fecha/2024-05-20",
+              "host": ["{{base_url}}"],
+              "path": ["actividades", "fecha", "2024-05-20"]
+            },
+            "description": "Obtiene todas las actividades programadas para una fecha específica"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/actividades/fecha/2024-05-20",
+                  "host": ["{{base_url}}"],
+                  "path": ["actividades", "fecha", "2024-05-20"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"titulo\": \"Visita al Museo Nacional de Colombia\",\n    \"fecha\": \"2024-05-20\",\n    \"cupoMaximo\": 30,\n    \"estado\": 0\n  },\n  {\n    \"id\": 2,\n    \"titulo\": \"Concierto de Música Clásica\",\n    \"fecha\": \"2024-05-20\",\n    \"cupoMaximo\": 50,\n    \"estado\": 1\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reseñas",
+      "item": [
+        {
+          "name": "Agregar Reseña",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comentario\": \"Excelente experiencia, muy bien organizada\",\n  \"calificacion\": 5,\n  \"fecha\": \"2024-05-20\",\n  \"estudianteId\": 1,\n  \"actividadId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/resenas/1/1",
+              "host": ["{{base_url}}"],
+              "path": ["resenas", "1", "1"]
+            },
+            "description": "Agrega una reseña a una actividad finalizada"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comentario\": \"Excelente experiencia, muy bien organizada\",\n  \"calificacion\": 5,\n  \"fecha\": \"2024-05-20\",\n  \"estudianteId\": 1,\n  \"actividadId\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/resenas/1/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["resenas", "1", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"comentario\": \"Excelente experiencia, muy bien organizada\",\n  \"calificacion\": 5,\n  \"fecha\": \"2024-05-20\",\n  \"estudiante\": {\n    \"id\": 1,\n    \"nombre\": \"Juan Pérez\"\n  },\n  \"actividad\": {\n    \"id\": 1,\n    \"titulo\": \"Visita al Museo Nacional de Colombia\"\n  }\n}"
+            },
+            {
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comentario\": \"Excelente experiencia, muy bien organizada\",\n  \"calificacion\": 5,\n  \"fecha\": \"2024-05-20\",\n  \"estudianteId\": 1,\n  \"actividadId\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/resenas/1/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["resenas", "1", "1"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"La actividad no está finalizada\",\n  \"error\": \"Bad Request\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Obtener Reseña por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/resenas/1",
+              "host": ["{{base_url}}"],
+              "path": ["resenas", "1"]
+            },
+            "description": "Obtiene una reseña específica por su ID"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/resenas/1",
+                  "host": ["{{base_url}}"],
+                  "path": ["resenas", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"comentario\": \"Excelente experiencia, muy bien organizada\",\n  \"calificacion\": 5,\n  \"fecha\": \"2024-05-20\",\n  \"estudiante\": {\n    \"id\": 1,\n    \"nombre\": \"Juan Pérez\"\n  },\n  \"actividad\": {\n    \"id\": 1,\n    \"titulo\": \"Visita al Museo Nacional de Colombia\"\n  }\n}"
+            },
+            {
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/resenas/999",
+                  "host": ["{{base_url}}"],
+                  "path": ["resenas", "999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Reseña no encontrada\",\n  \"error\": \"Not Found\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3001"
+    }
+  ]
+}
